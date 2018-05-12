@@ -1,4 +1,4 @@
-angular.module('video-player', [])
+angular.module('video-player', ['ngYoutubeEmbed'])
 .config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',

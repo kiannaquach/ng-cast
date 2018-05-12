@@ -17,7 +17,7 @@ angular.module('video-player')
     this.url = "https://www.youtube.com/embed/" + this.selected.id.videoId;
     this.title = this.selected.snippet.title;
     this.description = this.selected.snippet.description;
-
+    this.index = 0;
 
     this.select = (function(index) {      
       this.selected = this.videos[index];
@@ -40,7 +40,7 @@ angular.module('video-player')
     this.search = (function(response) {
       this.videos = response.data.items;
       this.selected = this.videos[0];
-      this.url = "https://www.youtube.com/embed/" + this.selected.id.videoId + '?autoplay=true';
+      this.url = "https://www.youtube.com/embed/" + this.selected.id.videoId;
       this.title = this.selected.snippet.title;
       this.description = this.selected.snippet.description;
     }).bind(this);
@@ -74,6 +74,18 @@ angular.module('video-player')
         id: this.selected.id.videoId
       }
       youTube.getRequestVideos(videoOptions, this.expand);
+    }).bind(this);
+
+    this.next = (function(event) {
+      if(event.data === 0 && this.index < 5){
+        this.index++;
+        this.selected = this.videos[this.index];
+        this.url = "https://www.youtube.com/embed/" + this.selected.id.videoId;
+        this.title = this.selected.snippet.title;
+        this.description = this.selected.snippet.description;
+        event.target.cueVideoById(this.selected.id.videoId);
+        event.target.playVideo();
+      }
     }).bind(this);
   },
   templateUrl: 'src/templates/app.html'

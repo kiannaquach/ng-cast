@@ -5,11 +5,8 @@ angular.module('video-player')
     url: "<",
     description: "<",
     title: "<",
-    details: "<"
-  },
-
-  controller: function() {
-    console.log(this)
+    details: "<",
+    next: "<"
   },
 
   templateUrl: 'src/templates/videoPlayer.html'
