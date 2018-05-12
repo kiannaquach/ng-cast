@@ -15,7 +15,7 @@ angular.module('video-player')
       this.url = "https://www.youtube.com/embed/" + this.selected.id.videoId;
       this.title = this.selected.snippet.title;
       this.description = this.selected.snippet.description;
-      console.log('Select: ',this);      
+      // console.log('Select: ',this);      
     }).bind(this);
 
     // search function for fetching data
@@ -34,20 +34,19 @@ angular.module('video-player')
       this.url = "https://www.youtube.com/embed/" + this.selected.id.videoId;
       this.title = this.selected.snippet.title;
       this.description = this.selected.snippet.description;
-      console.log('hello');
     }).bind(this);
 
-    youTube.getRequest(options, this.search)
+    youTube.getRequest(options, this.search);
 
-    this.request = (function() {
+    this.request = _.debounce(function(inputText) {
       var options = {
-        q: this.input,
+        q: inputText,
         key: window.YOUTUBE_API_KEY,
         part: 'snippet',
         maxResults: 5
       }
       youTube.getRequest(options, this.search);
-    }).bind(this)
+    }, 500).bind(this);
   },
   templateUrl: 'src/templates/app.html'
 });
