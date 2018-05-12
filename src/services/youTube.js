@@ -10,5 +10,17 @@ angular.module('video-player')
     }, function error(response) {
       console.log('error', response)
     });
-  }
+  };
+
+    this.getRequestVideos = function(options, callback) {
+      $http({
+        method: 'GET',
+        url: 'https://www.googleapis.com/youtube/v3/videos',
+        params: options
+      }).then(function success(response) {
+        callback(response)
+      }, function error(response) {
+        console.log('error', response)
+      }); 
+    };
 });

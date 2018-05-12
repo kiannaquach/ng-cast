@@ -4,7 +4,8 @@ angular.module('video-player')
   bindings: {
     url: "<",
     description: "<",
-    title: "<"
+    title: "<",
+    details: "<"
   },
 
   controller: function() {
